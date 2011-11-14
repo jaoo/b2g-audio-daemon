@@ -41,6 +41,7 @@ int onAudioRequest(int request){
     AudioSystem::isMicrophoneMuted(&state);
     state ? AudioSystem::setPhoneState(AudioSystem::MODE_IN_CALL) :
       AudioSystem::setPhoneState(AudioSystem::MODE_IN_COMMUNICATION);    
+    AudioSystem::muteMicrophone(!state);
     return 0;
   case AUDIO_REQUEST_MODE_NORMAL: 
     LOGI("AUDIO_REQUEST_MODE_NORMAL\n");
