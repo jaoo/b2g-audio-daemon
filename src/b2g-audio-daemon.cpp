@@ -98,13 +98,12 @@ int main(int argc, char **argv){
     while(1){
       retval = read(audiob2g_rw, data, 1024);
       if(retval > 0){
-	if(retval > 4){
-	  uint32_t *prequest = reinterpret_cast<uint32_t*>(data);
-	  uint32_t request = *(prequest);
-	  if (request > RIL_UNSOL_RESEND_INCALL_MUTE)
-	    onAudioRequest(request);
-	}
-      }else break;
+        LOGI("Audio request received");
+	      uint32_t *prequest = reinterpret_cast<uint32_t*>(data);
+	      uint32_t request = *(prequest);
+	      if (request > RIL_UNSOL_RESEND_INCALL_MUTE)
+	        onAudioRequest(request);
+	    } else break;      
     }
     close(audiob2g_rw);
   }
